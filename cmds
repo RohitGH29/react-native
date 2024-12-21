@@ -1,0 +1,23 @@
+# setup Android environment
+sudo apt-get update
+sudo apt-get install openjdk-11-jdk gradle
+wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+unzip commandlinetools-linux-9477386_latest.zip -d $HOME/android-sdk
+rm -rf commandlinetools-linux-9477386_latest.zip -d $HOME/android-sdk
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+export PATH=$ANDROID_HOME/platform-tools:$PATH
+source ~/.bashrc
+ls -lR $ANDROID_HOME/cmdline-tools
+mkdir -p $ANDROID_HOME/cmdline-tools/latest
+mv $ANDROID_HOME/cmdline-tools/* $ANDROID_HOME/cmdline-tools/latest/
+ls -lR $ANDROID_HOME/cmdline-tools
+sdkmanager "platforms;android-33" "build-tools;33.0.2" "platform-tools"
+sdkmanager --list
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
+echo $ANDROID_HOME
+cd /workspaces/react-native/ExpenseTracker/android
+echo "sdk.dir=$ANDROID_HOME" > local.properties
+cat local.properties
+./gradlew assembleRelease
