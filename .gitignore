@@ -1,1 +1,5 @@
 ExpenseTracker
+# Example .gitignore
+*.log
+node_modules/
+tmp/
